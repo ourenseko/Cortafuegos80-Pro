@@ -48,6 +48,7 @@ goto main
 
 :check_rules
 :: Verificar reglas de los puertos bloqueados
+start C:\WINDOWS\system32\WF.msc
 FOR %%P IN (%PORTS%) DO (
     netsh advfirewall firewall show rule name="Bloquear puerto %%P"
 )
