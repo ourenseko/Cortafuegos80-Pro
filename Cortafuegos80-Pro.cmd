@@ -1,6 +1,6 @@
 
 @ECHO OFF
-TITULO CORTAFUEGOS80
+TITULO CORTAFUEGOS80-Pro
 COLOR 02
 rem powershell Start-Process cmd -Verb runAs
 
