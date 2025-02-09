@@ -1,7 +1,7 @@
 # Cortafuegos80-Pro
 BATCH Script 
 
-Bloquea todas las conexiones entrantes y salientes de forma rapida en "Windows Defender Firewall con Seguridad Avanzada"
+Bloquea todas las conexiones entrantes y salientes de forma rápida y fulminante en "Windows Defender Firewall con Seguridad Avanzada"
 
 ![{9BC2FFFD-1E78-41A4-B3D4-7DA2EC40295E}](https://github.com/user-attachments/assets/3396816e-02c0-425a-8861-596a9c922c12)
 
