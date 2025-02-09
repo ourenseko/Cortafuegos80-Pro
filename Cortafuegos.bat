@@ -1,10 +1,6 @@
 @ECHO OFF
 TITULO CORTAFUEGOS80
 COLOR 02
-rem powershell Start-Process cmd -Verb runAs
-
-:: Lista de puertos a bloquear
-SET PORTS=80 8080 21 2121 443 8443 10443
 
 :main
 cls
@@ -25,45 +21,7 @@ netsh advfirewall firewall add rule name="Bloquear todo el tráfico saliente" di
 netsh advfirewall firewall add rule name="Bloquear todo el tráfico saliente" dir=out action=block protocol=UDP localport=any
 netsh advfirewall firewall add rule name="Bloquear todo el tráfico entrante" dir=in action=block protocol=TCP localport=any
 netsh advfirewall firewall add rule name="Bloquear todo el tráfico entrante" dir=in action=block protocol=UDP localport=any
-
-:: Bloquear puertos en la lista
-FOR %%P IN (%PORTS%) DO (
-    netsh advfirewall firewall add rule name="Bloquear puerto %%P" dir=in action=block protocol=TCP localport=%%P
-    netsh advfirewall firewall add rule name="Bloquear puerto %%P" dir=out action=block protocol=TCP localport=%%P
-    netsh advfirewall firewall add rule name="Bloquear puerto %%P" dir=in action=block protocol=UDP localport=%%P
-    netsh advfirewall firewall add rule name="Bloquear puerto %%P" dir=out action=block protocol=UDP localport=%%P
-)
-
 netsh advfirewall set allprofiles state on
-PAUSE
-goto main
-
-:check_rules
-:: Verificar reglas de los puertos bloqueados
-start C:\WINDOWS\system32\WF.msc
-FOR %%P IN (%PORTS%) DO (
-    netsh advfirewall firewall show rule name="Bloquear puerto %%P"
-)
-PAUSE
-goto main
-
-:test_ping
-:: Prueba el acceso a la red
-ping 8.8.8.8
-PAUSE
-goto main
-
-:block_app
-:: Bloquear una aplicación específica
-Echo Arrastra a esta ventana el ejecutable (APP) o escribe la ruta completa entre comillas: "C:/ruta_completa"
-set /p dir=^>^>^> 
-netsh advfirewall firewall add rule name="Bloquear App" dir=out action=block program=%dir%
-PAUSE
-goto main
-
-:view_ports
-:: Ver los puertos activos
-netstat -ano
 PAUSE
 goto main
 
@@ -71,11 +29,6 @@ goto main
 :: Desactivar todas las reglas aplicadas
 netsh advfirewall firewall delete rule name="Bloquear todo el tráfico saliente"
 netsh advfirewall firewall delete rule name="Bloquear todo el tráfico entrante"
-
-FOR %%P IN (%PORTS%) DO (
-    netsh advfirewall firewall delete rule name="Bloquear puerto %%P"
-)
-
 netsh advfirewall reset
 PAUSE
 goto main
