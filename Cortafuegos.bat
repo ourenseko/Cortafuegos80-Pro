@@ -10,20 +10,12 @@ SET PORTS=80 8080 21 2121 443 8443 10443
 cls
 ECHO INTRODUCE UN NUMERO DE PROGRAMA
 ECHO. [1] ACTIVAR CORTAFUEGOS
-ECHO. [2] Verificar Reglas
-ECHO. [7] Test ping
-ECHO. [8] BLOQUEAR APP
-ECHO. [9] Ver puertos activos
 ECHO. [0] DESACTIVAR CORTAFUEGOS
 set /p n=^>^>^> 
 goto handle_choice
 
 :handle_choice
 IF "%n%"=="1" GOTO activate_firewall
-IF "%n%"=="2" GOTO check_rules
-IF "%n%"=="7" GOTO test_ping
-IF "%n%"=="8" GOTO block_app
-IF "%n%"=="9" GOTO view_ports
 IF "%n%"=="0" GOTO deactivate_firewall
 goto main
 
